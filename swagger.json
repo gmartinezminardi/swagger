@@ -1,0 +1,469 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "FSM API V3",
+        "description": "Move your app forward with the Uber API",
+        "version": "1.0.0"
+    },
+    "host": "flights.despegar.it",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/v3/flights",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+	"/itineraries": {
+		"get": {
+                "summary": "Get Location requirements",
+                "description": "Provides travel requirements (vaccines, visas, passports, etc.) considering origins, destinations, stopovers and connections. Please, try to use the last version which is 2\n",
+                "parameters": [
+                    {
+                        "name": "site",
+                        "in": "query",
+                        "description": "Country code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "channel",
+                        "in": "query",
+                        "description": "Channel identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Departure airport/city code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "Arrival airport/city code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "departure_date",
+                        "in": "query",
+                        "description": "Date of departure",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "adults",
+                        "in": "query",
+                        "description": "Quantity of adults travelling",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "return_date",
+                        "in": "query",
+                        "description": "Date of return. The presence of this parameter means it's a round trip ticket",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "children",
+                        "in": "query",
+                        "description": "Quantity of children travelling (from the age of 2 up to 11)",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "infants",
+                        "in": "query",
+                        "description": "Quantity of infant travelling",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "group_by",
+                        "in": "query",
+                        "description": "Group items by certain criteria. Values: 'none', 'default'. By default, the criteria is 'default'",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Pagination: show elements starting from this offset",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Pagination: after the offset, show this quantity of elements",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "sorting",
+                        "in": "query",
+                        "description": "Sorting criteria",
+                        "required": false,
+                        "type": "string",
+			"enum": ["a", "b"]
+				
+                    },
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "The currency upon which the prices will be shown",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter the search with a certain criteria. The only possible value is 'cheapest-by-airlines-by-stops'",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "with",
+                        "in": "query",
+                        "description": "Adds extra info to the response",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "Defines if the price is raw or rounded",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wishlist_code",
+                        "in": "query",
+                        "description": "Wishlist Code",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total_price_range",
+                        "in": "query",
+                        "description": "Limits the result to the given price range (ie: 1000-2500)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stops",
+                        "in": "query",
+                        "description": "Limits the result to direct, one-stop and/or multiple-stop itineraries",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "outbound_time",
+                        "in": "query",
+                        "description": "Limits the result according the specified outbound schedule",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "inbound_time",
+                        "in": "query",
+                        "description": "Limits the result according the specified inbound schedule",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "outbound_airports",
+                        "in": "query",
+                        "description": "Limits the result to the given departure airports for the outbound flight",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "inbound_airports",
+                        "in": "query",
+                        "description": "Limits the result to the given departure airports for the inbound flight",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "airports",
+                        "in": "query",
+                        "description": "Limits the result to the given airports",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alliances",
+                        "in": "query",
+                        "description": "Limits the result to the given alliances",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "outbound_time_range",
+                        "in": "query",
+                        "description": "Allowed time range of the outbound route. Format: hh:mm-hh:mm. Eg.: 07:00-14:30",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "inbound_time_range",
+                        "in": "query",
+                        "description": "Allowed time range of the inbound route. Format: hh:mm-hh:mm. Eg.: 07:00-14:30",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unique_airline",
+                        "in": "query",
+                        "description": "If true, both trips must be done using the same airline. (Only valid in roundtrip searches)",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "unique_outbound_airport",
+                        "in": "query",
+                        "description": "If true, both first departure and last arrival must be in the same airport. (Only valid in roundtrip searches)",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "outbound_duration_range",
+                        "in": "query",
+                        "description": "Allowed duration range in minutes of the outbound route. Format: %d-%d. Eg.: 0-540",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "inbound_duration_range",
+                        "in": "query",
+                        "description": "Allowed duration range in minutes of the inbound route. Format: %d-%d. Eg.: 0-540",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "promotions",
+                        "in": "query",
+                        "description": "Include promotional results, non-promotional results, or both",
+                        "required": false,
+                        "type": "boolean"
+                    }
+               ],
+                "tags": [
+                    "Availability"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of location requirements",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LocationRequirement"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parameter error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+	},
+        "/location-requirements": {
+            "get": {
+                "summary": "Get Location requirements",
+                "description": "Provides travel requirements (vaccines, visas, passports, etc.) considering origins, destinations, stopovers and connections. Please, try to use the last version which is 2\n",
+                "parameters": [
+                    {
+                        "name": "site",
+                        "in": "query",
+                        "description": "Country code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "channel",
+                        "in": "query",
+                        "description": "Channel identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "origins",
+                        "in": "query",
+                        "description": "Countries or airport where the flight is originated",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "destinations",
+                        "in": "query",
+                        "description": "Countries or airport where the flight arrives",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stopovers",
+                        "in": "query",
+                        "description": "Countries or airport where the flight stops",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "XDESP-Api-Version",
+                        "in": "header",
+                        "description": "asd",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Requirements"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of location requirements",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LocationRequirement"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parameter error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/itinerares/{id}/wishlist-codes": {
+            "get": {
+                "summary": "Wishlist Codes",
+                "description": "An itinerary has a wishlist code associated. This wishlist code can be used, further in time, to retrieve the itinerary of the original itinerary, or a very similar one. The /v3/flights/itineraries/{id}/wishlist-codes resource contains a collection of associations between itineraries and their wishlist codes. Even if the itinerary cease to exist, its wishlist code may be associated to a different but very similar new itinerary.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Unique identifier for an itinerary",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "outbound",
+                        "in": "query",
+                        "description": "Outbound route",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "inbound",
+                        "in": "query",
+                        "description": "Inbound route",
+                        "required": false,
+                        "type": "number",
+                        "format": "int32"
+                    }
+                ],
+                "tags": [
+                    "Availability"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of wishlist codes for all routes for that itinerary",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WishlistCode"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parameter Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "LocationRequirement": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a location and requirement"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Location where requirement applies"
+                },
+                "requirement_id": {
+                    "type": "string",
+                    "description": "Id of requirement."
+                }
+            }
+        },
+        "WishlistCode": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier for wishlistcode"
+                },
+                "outbound": {
+                    "type": "string",
+                    "description": "Outbound route"
+                },
+                "inbound": {
+                    "type": "string",
+                    "description": "Inbound route"
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "causes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
