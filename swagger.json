@@ -14,8 +14,8 @@
         "application/json"
     ],
     "paths": {
-	"/itineraries": {
-		"get": {
+        "/itineraries": {
+            "get": {
                 "summary": "Get Location requirements",
                 "description": "Provides travel requirements (vaccines, visas, passports, etc.) considering origins, destinations, stopovers and connections. Please, try to use the last version which is 2\n",
                 "parameters": [
@@ -59,7 +59,8 @@
                         "in": "query",
                         "description": "Quantity of adults travelling",
                         "required": true,
-                        "type": "number"
+                        "type": "number",
+                        "default": 1
                     },
                     {
                         "name": "return_date",
@@ -87,21 +88,27 @@
                         "in": "query",
                         "description": "Group items by certain criteria. Values: 'none', 'default'. By default, the criteria is 'default'",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            "none",
+                            "default"
+                        ]
                     },
                     {
                         "name": "offset",
                         "in": "query",
                         "description": "Pagination: show elements starting from this offset",
                         "required": false,
-                        "type": "number"
+                        "type": "number",
+                        "default": 0
                     },
                     {
                         "name": "limit",
                         "in": "query",
                         "description": "Pagination: after the offset, show this quantity of elements",
                         "required": false,
-                        "type": "number"
+                        "type": "number",
+                        "default": 20
                     },
                     {
                         "name": "sorting",
@@ -109,8 +116,25 @@
                         "description": "Sorting criteria",
                         "required": false,
                         "type": "string",
-			"enum": ["a", "b"]
-				
+                        "enum": [
+                            "total_price_ascending",
+                            "total_price_descending",
+                            "stopscount_ascending",
+                            "stopscount_descending",
+                            "scoring_ascending",
+                            "scoring_descending",
+                            "duration_ascending",
+                            "duration_descending",
+                            "personal_ascending",
+                            "personal_descending",
+                            "commission_ascending",
+                            "commission_descending",
+                            "commission_personal_ascending",
+                            "commission_personal_descending",
+                            "flight_class_ascending",
+                            "promotional_ascending"
+                        ],
+                        "default": "total_price_ascending"
                     },
                     {
                         "name": "currency",
@@ -124,21 +148,34 @@
                         "in": "query",
                         "description": "Filter the search with a certain criteria. The only possible value is 'cheapest-by-airlines-by-stops'",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            null,
+                            "cheapest-by-airlines-by-stops"
+                        ]
                     },
                     {
                         "name": "with",
                         "in": "query",
                         "description": "Adds extra info to the response",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            null,
+                            "commissions",
+                            "provider_price"
+                        ]
                     },
                     {
                         "name": "price",
                         "in": "query",
                         "description": "Defines if the price is raw or rounded",
                         "required": false,
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            null,
+                            "raw"
+                        ]
                     },
                     {
                         "name": "wishlist_code",
@@ -252,7 +289,7 @@
                         "required": false,
                         "type": "boolean"
                     }
-               ],
+                ],
                 "tags": [
                     "Availability"
                 ],
@@ -280,7 +317,7 @@
                     }
                 }
             }
-	},
+        },
         "/location-requirements": {
             "get": {
                 "summary": "Get Location requirements",
