@@ -677,8 +677,7 @@
                     "format": "double"
                 },
                 "cancelled": {
-                    "type": "number",
-                    "format": "double"
+                    "type": "number"
                 },
                 "more_than30_minutes": {
                     "type": "number",
