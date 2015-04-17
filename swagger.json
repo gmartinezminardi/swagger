@@ -791,6 +791,22 @@
                 }
             }
         },
+        "Paging": {
+            "properties": {
+                "limit": {
+                    "type": "number"
+                },
+                "offset": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
+                },
+                "total_itineraries": {
+                    "type": "number"
+                }
+            }
+        },
         "Sorting": {
             "properties": {
                 "criteria": {
@@ -808,22 +824,6 @@
                             }
                         }
                     }
-                }
-            }
-        },
-        "Paging": {
-            "properties": {
-                "offset": {
-                    "type": "number"
-                },
-                "limit": {
-                    "type": "number"
-                },
-                "total": {
-                    "type": "number"
-                },
-                "total_itineraries": {
-                    "type": "number"
                 }
             }
         },
