@@ -523,7 +523,8 @@
         "Choice": {
             "properties": {
                 "choice": {
-                    "type": "number"
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "duration": {
                     "type": "string"
@@ -569,7 +570,8 @@
                     "type": "string"
                 },
                 "seats_remaining": {
-                    "type": "number"
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "equipment_code": {
                     "type": "string"
@@ -614,13 +616,15 @@
                     "type": "string"
                 },
                 "weight": {
-                    "type": "number"
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "unit": {
                     "type": "string"
                 },
                 "quantity": {
-                    "type": "number"
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         },
@@ -669,16 +673,20 @@
                     "type": "string"
                 },
                 "on_time": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "cancelled": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "more_than30_minutes": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "more_than40_minutes": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "provider": {
                     "type": "string"
@@ -694,7 +702,8 @@
                     "type": "string"
                 },
                 "amount": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 }
             }
         },
@@ -704,28 +713,35 @@
                     "type": "string"
                 },
                 "adult_base": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "adults_sub_total": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "children_sub_total": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "infants_sub_total": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "currency": {
                     "type": "string"
                 },
                 "charges": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "penalty": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "fees": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "taxes_detail": {
                     "type": "array",
@@ -734,17 +750,20 @@
                     }
                 },
                 "taxes": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 },
                 "total": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "double"
                 }
             }
         },
         "TaxDetail": {
             "properties": {
                 "amount": {
-                    "type": "number"
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "code": {
                     "type": "string"
@@ -807,19 +826,19 @@
         "Paging": {
             "properties": {
                 "limit": {
-                    "type": "number",
+                    "type": "integer",
                     "format": "int32"
                 },
                 "offset": {
-                    "type": "number",
+                    "type": "integer",
                     "format": "int32"
                 },
                 "total": {
-                    "type": "number",
+                    "type": "integer",
                     "format": "int32"
                 },
                 "total_itineraries": {
-                    "type": "number",
+                    "type": "integer",
                     "format": "int32"
                 }
             }
