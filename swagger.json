@@ -807,16 +807,20 @@
         "Paging": {
             "properties": {
                 "limit": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "int32"
                 },
                 "offset": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "int32"
                 },
                 "total": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "int32"
                 },
                 "total_itineraries": {
-                    "type": "number"
+                    "type": "number",
+                    "format": "int32"
                 }
             }
         },
