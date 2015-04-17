@@ -259,7 +259,11 @@
                         "in": "query",
                         "description": "If true, both trips must be done using the same airline. (Only valid in roundtrip searches)",
                         "required": false,
-                        "type": "boolean",
+                        "type": "string",
+                        "enum": [
+                            false,
+                            true
+                        ],
                         "default": false
                     },
                     {
@@ -267,7 +271,11 @@
                         "in": "query",
                         "description": "If true, both first departure and last arrival must be in the same airport. (Only valid in roundtrip searches)",
                         "required": false,
-                        "type": "boolean",
+                        "type": "string",
+                        "enum": [
+                            false,
+                            true
+                        ],
                         "default": false
                     },
                     {
@@ -289,8 +297,13 @@
                         "in": "query",
                         "description": "Include promotional results, non-promotional results, or both",
                         "required": false,
-                        "type": "boolean",
-                        "default": false
+                        "type": "string",
+                        "enum": [
+                            null,
+                            false,
+                            true
+                        ],
+                        "default": null
                     }
                 ],
                 "tags": [
