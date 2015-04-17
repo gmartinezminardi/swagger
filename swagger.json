@@ -16,8 +16,8 @@
     "paths": {
         "/itineraries": {
             "get": {
-                "summary": "Get Location requirements",
-                "description": "Provides travel requirements (vaccines, visas, passports, etc.) considering origins, destinations, stopovers and connections. Please, try to use the last version which is 2\n",
+                "summary": "Get itineraries",
+                "description": "Search flight itineraries for a given date from one specified point to another. The result is a list of itineraries, each of wich can have various options. The client will eventually get to choose one of the given options. The itinerary is then delimited by an id, an outbound_choice and, for round trip flights, an inbound_choice",
                 "parameters": [
                     {
                         "name": "site",
@@ -57,7 +57,7 @@
                     {
                         "name": "adults",
                         "in": "query",
-                        "description": "Quantity of adults travelling",
+                        "description": "Adults travelling",
                         "required": true,
                         "type": "number",
                         "default": 1
@@ -72,21 +72,21 @@
                     {
                         "name": "children",
                         "in": "query",
-                        "description": "Quantity of children travelling (from the age of 2 up to 11)",
+                        "description": "Children travelling (from the age of 2 up to 11)",
                         "required": false,
                         "type": "number"
                     },
                     {
                         "name": "infants",
                         "in": "query",
-                        "description": "Quantity of infant travelling",
+                        "description": "Infants travelling",
                         "required": false,
                         "type": "number"
                     },
                     {
                         "name": "group_by",
                         "in": "query",
-                        "description": "Group items by certain criteria. Values: 'none', 'default'. By default, the criteria is 'default'",
+                        "description": "Group items by certain criteria",
                         "required": false,
                         "type": "string",
                         "enum": [
@@ -295,12 +295,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "An array of location requirements",
+                        "description": "An array of itineraries",
                         "schema": {
                             "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/LocationRequirement"
-                            }
+                            "$ref": "#/definitions/Item"
                         }
                     },
                     "400": {
@@ -394,7 +392,7 @@
                 }
             }
         },
-        "/itinerares/{id}/wishlist-codes": {
+        "/itineraries/{id}/wishlist-codes": {
             "get": {
                 "summary": "Wishlist Codes",
                 "description": "An itinerary has a wishlist code associated. This wishlist code can be used, further in time, to retrieve the itinerary of the original itinerary, or a very similar one. The /v3/flights/itineraries/{id}/wishlist-codes resource contains a collection of associations between itineraries and their wishlist codes. Even if the itinerary cease to exist, its wishlist code may be associated to a different but very similar new itinerary.",
@@ -453,6 +451,380 @@
         }
     },
     "definitions": {
+        "Item": {
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Itinerary"
+                    }
+                },
+                "facets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Facet"
+                    }
+                },
+                "sorting": {
+                    "$ref": "#/definitions/Sorting"
+                },
+                "paging": {
+                    "$ref": "#/definitions/Paging"
+                }
+            }
+        },
+        "Itinerary": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "outbound_choices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Choice"
+                    }
+                },
+                "inbound_choices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Choice"
+                    }
+                },
+                "price_detail": {
+                    "$ref": "#/definitions/PriceDetail"
+                },
+                "terms_and_conditions": {
+                    "$ref": "#/definitions/TermsAndConditions"
+                },
+                "validating_carrier": {
+                    "type": "string"
+                },
+                "last_minute": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Choice": {
+            "properties": {
+                "choice": {
+                    "type": "number"
+                },
+                "duration": {
+                    "type": "string"
+                },
+                "segments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Segment"
+                    }
+                },
+                "delay_info": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DelayInfo"
+                    }
+                }
+            }
+        },
+        "Segment": {
+            "properties": {
+                "airline": {
+                    "type": "string"
+                },
+                "arrival_datetime": {
+                    "type": "string"
+                },
+                "cabin_type": {
+                    "type": "string"
+                },
+                "departure_datetime": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "string"
+                },
+                "flight_id": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "seats_remaining": {
+                    "type": "number"
+                },
+                "equipment_code": {
+                    "type": "string"
+                },
+                "ancillary": {
+                    "$ref": "#/definitions/Ancillary"
+                }
+            }
+        },
+        "Ancillary": {
+            "properties": {
+                "baggages_info": {
+                    "$ref": "#/definitions/BaggagesInfo"
+                },
+                "meals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Meal"
+                    }
+                },
+                "entertainments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Entertainment"
+                    }
+                }
+            }
+        },
+        "BaggagesInfo": {
+            "properties": {
+                "baggages": {
+                    "$ref": "#/definitions/Baggage"
+                },
+                "priced_baggages": {
+                    "$ref": "#/definitions/PricedBaggage"
+                }
+            }
+        },
+        "Baggage": {
+            "type": "array",
+            "items": {
+                "passenger_type": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "number"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "number"
+                }
+            }
+        },
+        "PricedBaggage": {
+            "properties": {
+                "first": {
+                    "$ref": "#/definitions/Price"
+                },
+                "second": {
+                    "$ref": "#/definitions/Price"
+                },
+                "third": {
+                    "$ref": "#/definitions/Price"
+                }
+            }
+        },
+        "Meal": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "price": {
+                    "$ref": "#/definitions/Price"
+                }
+            }
+        },
+        "Entertainment": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "price": {
+                    "$ref": "#/definitions/Price"
+                }
+            }
+        },
+        "DelayInfo": {
+            "properties": {
+                "flight_id": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "on_time": {
+                    "type": "number"
+                },
+                "cancelled": {
+                    "type": "number"
+                },
+                "more_than30_minutes": {
+                    "type": "number"
+                },
+                "more_than40_minutes": {
+                    "type": "number"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                }
+            }
+        },
+        "Price": {
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "number"
+                }
+            }
+        },
+        "PriceDetail": {
+            "properties": {
+                "commercial_policy": {
+                    "type": "string"
+                },
+                "adult_base": {
+                    "type": "number"
+                },
+                "adults_sub_total": {
+                    "type": "number"
+                },
+                "children_sub_total": {
+                    "type": "number"
+                },
+                "infants_sub_total": {
+                    "type": "number"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "charges": {
+                    "type": "number"
+                },
+                "penalty": {
+                    "type": "number"
+                },
+                "fees": {
+                    "type": "number"
+                },
+                "taxes_detail": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TaxDetail"
+                    }
+                },
+                "taxes": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
+                }
+            }
+        },
+        "TaxDetail": {
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "TermsAndConditions": {
+            "properties": {
+                "fare": {
+                    "type": "string"
+                },
+                "documentation": {
+                    "type": "string"
+                },
+                "bank": {
+                    "type": "string"
+                },
+                "promo": {
+                    "type": "string"
+                },
+                "baggage": {
+                    "type": "string"
+                },
+                "others": {
+                    "type": "string"
+                }
+            }
+        },
+        "Facet": {
+            "properties": {
+                "criteria": {
+                    "type": "string"
+                },
+                "min": {
+                    "type": "string"
+                },
+                "max": {
+                    "type": "string"
+                },
+                "min_selected": {
+                    "type": "string"
+                },
+                "max_selected": {
+                    "type": "string"
+                },
+                "sub_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Sorting": {
+            "properties": {
+                "criteria": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "selected": {
+                                "type": "boolean"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Paging": {
+            "properties": {
+                "offset": {
+                    "type": "number"
+                },
+                "limit": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
+                },
+                "total_itineraries": {
+                    "type": "number"
+                }
+            }
+        },
         "LocationRequirement": {
             "properties": {
                 "id": {
