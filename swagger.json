@@ -593,8 +593,7 @@
             }
         },
         "Baggage": {
-            "type": "array",
-            "items": {
+            "properties": {
                 "passenger_type": {
                     "type": "string"
                 },
