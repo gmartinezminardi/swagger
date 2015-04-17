@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "title": "FSM API V3",
-        "description": "Move your app forward with the Uber API",
-        "version": "1.0.0"
+        "description": "API v3 is divided in modules, each one corresponding to one vertical. So there is a Flights API, a Hotel API, etc. This module correspond to the operations regarding flights",
+        "version": "1.95.2"
     },
     "host": "flights.despegar.it",
     "schemes": [
@@ -14,6 +14,268 @@
         "application/json"
     ],
     "paths": {
+        "/flights/itineraries": {
+            "get": {
+                "summary": "Get itineraries",
+                "description": "Search flight itineraries for a given date from one specified point to another. The result is a list of itineraries, each of wich can have various options. The client will eventually get to choose one of the given options. The itinerary is then delimited by an id, an outbound_choice and, for round trip flights, an inbound_choice",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/site"
+                    },
+                    {
+                        "$ref": "#/parameters/channel"
+                    },
+                    {
+                        "$ref": "#/parameters/from"
+                    },
+                    {
+                        "$ref": "#/parameters/to"
+                    },
+                    {
+                        "$ref": "#/parameters/departure_date"
+                    },
+                    {
+                        "$ref": "#/parameters/adults"
+                    },
+                    {
+                        "$ref": "#/parameters/return_date"
+                    },
+                    {
+                        "$ref": "#/parameters/children"
+                    },
+                    {
+                        "$ref": "#/parameters/infants"
+                    },
+                    {
+                        "$ref": "#/parameters/group_by"
+                    },
+                    {
+                        "$ref": "#/parameters/offset"
+                    },
+                    {
+                        "$ref": "#/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/parameters/sorting"
+                    },
+                    {
+                        "$ref": "#/parameters/currency"
+                    },
+                    {
+                        "$ref": "#/parameters/filter"
+                    },
+                    {
+                        "$ref": "#/parameters/with"
+                    },
+                    {
+                        "$ref": "#/parameters/price"
+                    },
+                    {
+                        "$ref": "#/parameters/wishlist_code"
+                    },
+                    {
+                        "$ref": "#/parameters/total_price_range"
+                    },
+                    {
+                        "$ref": "#/parameters/stops"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_time"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_time"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_airports"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_airports"
+                    },
+                    {
+                        "$ref": "#/parameters/airports"
+                    },
+                    {
+                        "$ref": "#/parameters/alliances"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_time_range"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_time_range"
+                    },
+                    {
+                        "$ref": "#/parameters/unique_airline"
+                    },
+                    {
+                        "$ref": "#/parameters/unique_outbound_airport"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_duration_range"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_duration_range"
+                    },
+                    {
+                        "$ref": "#/parameters/promotions"
+                    }
+                ],
+                "tags": [
+                    "Availability"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of itineraries",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/Item"
+                        }
+                    },
+                    "400": {
+                        "description": "Parameter error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/packages/flights/itineraries": {
+            "get": {
+                "summary": "Get itineraries for packages",
+                "description": "Search flight itineraries for a given date from one specified point to another. The result is a list of itineraries, each of wich can have various options. The client will eventually get to choose one of the given options. The itinerary is then delimited by an id, an outbound_choice and, for round trip flights, an inbound_choice",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/site"
+                    },
+                    {
+                        "$ref": "#/parameters/channel"
+                    },
+                    {
+                        "$ref": "#/parameters/from"
+                    },
+                    {
+                        "$ref": "#/parameters/to"
+                    },
+                    {
+                        "$ref": "#/parameters/departure_date"
+                    },
+                    {
+                        "$ref": "#/parameters/adults"
+                    },
+                    {
+                        "$ref": "#/parameters/return_date"
+                    },
+                    {
+                        "$ref": "#/parameters/children"
+                    },
+                    {
+                        "$ref": "#/parameters/infants"
+                    },
+                    {
+                        "$ref": "#/parameters/group_by"
+                    },
+                    {
+                        "$ref": "#/parameters/offset"
+                    },
+                    {
+                        "$ref": "#/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/parameters/sorting"
+                    },
+                    {
+                        "$ref": "#/parameters/currency"
+                    },
+                    {
+                        "$ref": "#/parameters/filter"
+                    },
+                    {
+                        "$ref": "#/parameters/with"
+                    },
+                    {
+                        "$ref": "#/parameters/price"
+                    },
+                    {
+                        "$ref": "#/parameters/wishlist_code"
+                    },
+                    {
+                        "$ref": "#/parameters/total_price_range"
+                    },
+                    {
+                        "$ref": "#/parameters/stops"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_time"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_time"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_airports"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_airports"
+                    },
+                    {
+                        "$ref": "#/parameters/airports"
+                    },
+                    {
+                        "$ref": "#/parameters/alliances"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_time_range"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_time_range"
+                    },
+                    {
+                        "$ref": "#/parameters/unique_airline"
+                    },
+                    {
+                        "$ref": "#/parameters/unique_outbound_airport"
+                    },
+                    {
+                        "$ref": "#/parameters/outbound_duration_range"
+                    },
+                    {
+                        "$ref": "#/parameters/inbound_duration_range"
+                    },
+                    {
+                        "$ref": "#/parameters/promotions"
+                    }
+                ],
+                "tags": [
+                    "Availability"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of itineraries",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/Item"
+                        }
+                    },
+                    "400": {
+                        "description": "Parameter error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/flights/itineraries/{id}": {
             "get": {
                 "summary": "Get itinerary by ID",
@@ -23,11 +285,7 @@
                         "$ref": "#/parameters/id"
                     },
                     {
-                        "name": "channel",
-                        "in": "query",
-                        "description": "Channel identifier",
-                        "required": true,
-                        "type": "string"
+                        "$ref": "#/parameters/channel"
                     },
                     {
                         "name": "with",
@@ -95,20 +353,10 @@
                         "type": "string"
                     },
                     {
-                        "name": "outbound",
-                        "in": "query",
-                        "description": "Outbound route",
-                        "required": true,
-                        "type": "number",
-                        "format": "int32"
+                        "$ref": "#/parameters/outbound"
                     },
                     {
-                        "name": "inbound",
-                        "in": "query",
-                        "description": "Inbound route",
-                        "required": false,
-                        "type": "number",
-                        "format": "int32"
+                        "$ref": "#/parameters/inbound"
                     }
                 ],
                 "tags": [
@@ -413,7 +661,10 @@
         "BaggagesInfo": {
             "properties": {
                 "baggages": {
-                    "$ref": "#/definitions/Baggage"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Baggage"
+                    }
                 },
                 "priced_baggages": {
                     "$ref": "#/definitions/PricedBaggage"
@@ -724,18 +975,313 @@
     },
     "parameters": {
         "site": {
-            "name": "site2",
+            "name": "site",
             "in": "query",
             "description": "Country code",
             "required": true,
             "type": "string"
         },
+        "channel": {
+            "name": "channel",
+            "in": "query",
+            "description": "Channel identifier",
+            "required": true,
+            "type": "string"
+        },
+        "from": {
+            "name": "from",
+            "in": "query",
+            "description": "Departure airport/city code",
+            "required": true,
+            "type": "string"
+        },
+        "to": {
+            "name": "to",
+            "in": "query",
+            "description": "Arrival airport/city code",
+            "required": true,
+            "type": "string"
+        },
+        "departure_date": {
+            "name": "departure_date",
+            "in": "query",
+            "description": "Date of departure",
+            "required": true,
+            "type": "string"
+        },
+        "adults": {
+            "name": "adults",
+            "in": "query",
+            "description": "Adults travelling",
+            "required": true,
+            "type": "number",
+            "default": 1
+        },
+        "return_date": {
+            "name": "return_date",
+            "in": "query",
+            "description": "Date of return. The presence of this parameter means it's a round trip ticket",
+            "required": false,
+            "type": "string"
+        },
+        "children": {
+            "name": "children",
+            "in": "query",
+            "description": "Children travelling (from the age of 2 up to 11)",
+            "required": false,
+            "type": "number"
+        },
+        "infants": {
+            "name": "infants",
+            "in": "query",
+            "description": "Infants travelling",
+            "required": false,
+            "type": "number"
+        },
+        "group_by": {
+            "name": "group_by",
+            "in": "query",
+            "description": "Group items by certain criteria",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "none",
+                "default"
+            ]
+        },
+        "offset": {
+            "name": "offset",
+            "in": "query",
+            "description": "Pagination: show elements starting from this offset",
+            "required": false,
+            "type": "number",
+            "default": 0
+        },
+        "limit": {
+            "name": "limit",
+            "in": "query",
+            "description": "Pagination: after the offset, show this quantity of elements",
+            "required": false,
+            "type": "number",
+            "default": 20
+        },
+        "sorting": {
+            "name": "sorting",
+            "in": "query",
+            "description": "Sorting criteria",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "total_price_ascending",
+                "total_price_descending",
+                "stopscount_ascending",
+                "stopscount_descending",
+                "scoring_ascending",
+                "scoring_descending",
+                "duration_ascending",
+                "duration_descending",
+                "personal_ascending",
+                "personal_descending",
+                "commission_ascending",
+                "commission_descending",
+                "commission_personal_ascending",
+                "commission_personal_descending",
+                "flight_class_ascending",
+                "promotional_ascending"
+            ],
+            "default": "total_price_ascending"
+        },
+        "currency": {
+            "name": "currency",
+            "in": "query",
+            "description": "The currency upon which the prices will be shown",
+            "required": false,
+            "type": "string"
+        },
+        "filter": {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter the search with a certain criteria. The only possible value is 'cheapest-by-airlines-by-stops'",
+            "required": false,
+            "type": "string",
+            "enum": [
+                null,
+                "cheapest-by-airlines-by-stops"
+            ]
+        },
+        "with": {
+            "name": "with",
+            "in": "query",
+            "description": "Adds extra info to the response",
+            "required": false,
+            "type": "string",
+            "enum": [
+                null,
+                "commissions",
+                "provider_price"
+            ]
+        },
+        "price": {
+            "name": "price",
+            "in": "query",
+            "description": "Defines if the price is raw or rounded",
+            "required": false,
+            "type": "string",
+            "enum": [
+                null,
+                "raw"
+            ]
+        },
+        "wishlist_code": {
+            "name": "wishlist_code",
+            "in": "query",
+            "description": "Wishlist Code",
+            "required": false,
+            "type": "string"
+        },
+        "total_price_range": {
+            "name": "total_price_range",
+            "in": "query",
+            "description": "Limits the result to the given price range (ie: 1000-2500)",
+            "required": false,
+            "type": "string"
+        },
+        "stops": {
+            "name": "stops",
+            "in": "query",
+            "description": "Limits the result to direct, one-stop and/or multiple-stop itineraries",
+            "required": false,
+            "type": "string"
+        },
+        "outbound_time": {
+            "name": "outbound_time",
+            "in": "query",
+            "description": "Limits the result according the specified outbound schedule",
+            "required": false,
+            "type": "string"
+        },
+        "inbound_time": {
+            "name": "inbound_time",
+            "in": "query",
+            "description": "Limits the result according the specified inbound schedule",
+            "required": false,
+            "type": "string"
+        },
+        "outbound_airports": {
+            "name": "outbound_airports",
+            "in": "query",
+            "description": "Limits the result to the given departure airports for the outbound flight",
+            "required": false,
+            "type": "string"
+        },
+        "inbound_airports": {
+            "name": "inbound_airports",
+            "in": "query",
+            "description": "Limits the result to the given departure airports for the inbound flight",
+            "required": false,
+            "type": "string"
+        },
+        "airports": {
+            "name": "airports",
+            "in": "query",
+            "description": "Limits the result to the given airports",
+            "required": false,
+            "type": "string"
+        },
+        "alliances": {
+            "name": "alliances",
+            "in": "query",
+            "description": "Limits the result to the given alliances",
+            "required": false,
+            "type": "string"
+        },
+        "outbound_time_range": {
+            "name": "outbound_time_range",
+            "in": "query",
+            "description": "Allowed time range of the outbound route. Format: hh:mm-hh:mm. Eg.: 07:00-14:30",
+            "required": false,
+            "type": "string"
+        },
+        "inbound_time_range": {
+            "name": "inbound_time_range",
+            "in": "query",
+            "description": "Allowed time range of the inbound route. Format: hh:mm-hh:mm. Eg.: 07:00-14:30",
+            "required": false,
+            "type": "string"
+        },
+        "unique_airline": {
+            "name": "unique_airline",
+            "in": "query",
+            "description": "If true, both trips must be done using the same airline. (Only valid in roundtrip searches)",
+            "required": false,
+            "type": "string",
+            "enum": [
+                false,
+                true
+            ],
+            "default": false
+        },
+        "unique_outbound_airport": {
+            "name": "unique_outbound_airport",
+            "in": "query",
+            "description": "If true, both first departure and last arrival must be in the same airport. (Only valid in roundtrip searches)",
+            "required": false,
+            "type": "string",
+            "enum": [
+                false,
+                true
+            ],
+            "default": false
+        },
+        "outbound_duration_range": {
+            "name": "outbound_duration_range",
+            "in": "query",
+            "description": "Allowed duration range in minutes of the outbound route. Format: %d-%d. Eg.: 0-540",
+            "required": false,
+            "type": "string"
+        },
+        "inbound_duration_range": {
+            "name": "inbound_duration_range",
+            "in": "query",
+            "description": "Allowed duration range in minutes of the inbound route. Format: %d-%d. Eg.: 0-540",
+            "required": false,
+            "type": "string"
+        },
+        "promotions": {
+            "name": "promotions",
+            "in": "query",
+            "description": "Include promotional results, non-promotional results, or both",
+            "required": false,
+            "type": "string",
+            "enum": [
+                null,
+                false,
+                true
+            ],
+            "default": null
+        },
         "id": {
             "name": "id",
             "in": "path",
             "description": "Unique itinerary id",
-            "required": "ture",
+            "required": true,
             "type": "string"
+        },
+        "outbound": {
+            "name": "outbound",
+            "in": "query",
+            "description": "Outbound route",
+            "required": true,
+            "type": "number",
+            "format": "int32"
+        },
+        "inbound": {
+            "name": "inbound",
+            "in": "query",
+            "description": "Inbound route",
+            "required": false,
+            "type": "number",
+            "format": "int32"
         }
     }
 }
