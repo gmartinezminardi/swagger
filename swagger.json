@@ -259,14 +259,16 @@
                         "in": "query",
                         "description": "If true, both trips must be done using the same airline. (Only valid in roundtrip searches)",
                         "required": false,
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                     },
                     {
                         "name": "unique_outbound_airport",
                         "in": "query",
                         "description": "If true, both first departure and last arrival must be in the same airport. (Only valid in roundtrip searches)",
                         "required": false,
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                     },
                     {
                         "name": "outbound_duration_range",
@@ -287,7 +289,8 @@
                         "in": "query",
                         "description": "Include promotional results, non-promotional results, or both",
                         "required": false,
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default": false
                     }
                 ],
                 "tags": [
